@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct ContentView: View {
     @State var showExchangeInfo = false
@@ -16,6 +17,7 @@ struct ContentView: View {
     @State var rightCoin : Coins = .goldPenny
     @FocusState var leftTyping
     @FocusState var rightTyping
+    var coinTip = CoinTip()
     
     var body: some View {
         ZStack{
@@ -43,7 +45,9 @@ struct ContentView: View {
                         }
                         .onTapGesture {
                             showSelectCoin.toggle()
+                            coinTip.invalidate(reason: .actionPerformed)
                         }
+                        .popoverTip(coinTip,arrowEdge: .bottom)
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
                             .padding()
@@ -71,6 +75,7 @@ struct ContentView: View {
                         }
                         .onTapGesture {
                             showSelectCoin.toggle()
+                            coinTip.invalidate(reason: .actionPerformed)
                         }
                         TextField("Amount", text: $rightAmount)
                             .textFieldStyle(.roundedBorder)
@@ -97,6 +102,9 @@ struct ContentView: View {
                             .font(.largeTitle)
                             .foregroundStyle(.white)
                     }
+                    .task {
+                        try? Tips.configure()
+                    }
                     .onChange(of: leftCoin){
                         leftAmount = rightCoin.convert(amount: rightAmount, coin: leftCoin)
                         
@@ -114,6 +122,7 @@ struct ContentView: View {
                 }
             }
         }
+        
     }
 }
 
