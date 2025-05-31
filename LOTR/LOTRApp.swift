@@ -2,8 +2,7 @@
 //  LOTRApp.swift
 //  LOTR
 //
-//  Created by qbuser on 30/05/25.
-//
+
 
 import SwiftUI
 
