@@ -21,7 +21,7 @@ struct Selector: View {
                     .fontWeight(.bold)
                     .padding(.bottom)
                 IconGrid(coins: $topCoins)
- 
+                
                 Text("Select Currency to Convert")
                     .fontWeight(.bold)
                     .padding(.top)
@@ -34,7 +34,7 @@ struct Selector: View {
                 .font(.headline)
                 .padding()
                 .foregroundStyle(.white)
-                   
+                
             }
             .padding()
             .multilineTextAlignment(.center)
@@ -46,6 +46,6 @@ struct Selector: View {
 #Preview {
     @Previewable @State var top = Coins.silverPenny
     @Previewable @State var bottom = Coins.goldPenny
-
+    
     Selector( topCoins: $top , bottomCoins: $bottom)
 }

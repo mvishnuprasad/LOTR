@@ -7,7 +7,7 @@
 import Foundation
 import SwiftUI
 enum Coins : Double, CaseIterable , Identifiable{
-  
+    
     
     case copperPenny = 6400
     case silverPenny = 64
@@ -29,7 +29,7 @@ enum Coins : Double, CaseIterable , Identifiable{
             return .goldpenny
         case .goldPiece:
             return .goldpiece
-         
+            
         }
     }
     

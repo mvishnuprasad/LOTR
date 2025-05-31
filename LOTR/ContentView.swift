@@ -16,7 +16,7 @@ struct ContentView: View {
     @State var rightCoin : Coins = .goldPenny
     @FocusState var leftTyping
     @FocusState var rightTyping
-
+    
     var body: some View {
         ZStack{
             Image(.background)
@@ -30,8 +30,6 @@ struct ContentView: View {
                 Text("Currency Exchange")
                     .font(.title)
                     .foregroundStyle(.white)
-                
-
                 HStack {
                     VStack{
                         HStack{
@@ -42,7 +40,6 @@ struct ContentView: View {
                             Text(leftCoin.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
-                            
                         }
                         .onTapGesture {
                             showSelectCoin.toggle()
@@ -55,10 +52,7 @@ struct ContentView: View {
                                 if(leftTyping==true){
                                     rightAmount = leftCoin.convert(amount: leftAmount, coin: rightCoin)
                                 }
-                                
                             }
-                            
-                        
                     }
                     Image(systemName:"equal")
                         .font(.headline)
@@ -103,6 +97,13 @@ struct ContentView: View {
                             .font(.largeTitle)
                             .foregroundStyle(.white)
                     }
+                    .onChange(of: leftCoin){
+                        leftAmount = rightCoin.convert(amount: rightAmount, coin: leftCoin)
+                        
+                    }
+                    .onChange(of: rightCoin){
+                        rightAmount = leftCoin.convert(amount: leftAmount, coin: rightCoin)
+                    }
                     .sheet(isPresented: $showExchangeInfo, content: {
                         ExchangeInfo()
                     })
@@ -111,11 +112,7 @@ struct ContentView: View {
                     })
                     .padding(.trailing)
                 }
-
-                   
             }
-            
-            
         }
     }
 }

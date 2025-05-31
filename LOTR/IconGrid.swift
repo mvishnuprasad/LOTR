@@ -10,7 +10,6 @@ struct IconGrid: View {
     @Binding var coins : Coins
     var body: some View {
         LazyVGrid(columns: [GridItem(), GridItem(),GridItem()]){
-            
             ForEach(Coins.allCases){coins in
                 if self.coins == coins{
                     CoinView(coinName: coins.name,coinImage: coins.image)
@@ -27,13 +26,12 @@ struct IconGrid: View {
                         }
                 }
             }
-
         }
     }
 }
 
 #Preview {
     @Previewable @State var top = Coins.silverPenny
-
+    
     IconGrid( coins: $top)
 }
